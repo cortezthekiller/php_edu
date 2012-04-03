@@ -1,13 +1,12 @@
-<?
-// html tags
-echo "<html>";
-echo "<head>";
-echo "<title>PHP edu</title>";
-echo "</head>";
-echo "<body>";
-
-// In the body section. We can now echo something
-echo "I'm using github<br/>";
-echo "</body>";
-echo "</html>";
-?>
+<html>
+<head>
+<title>PHP edu</title>
+</head>
+<body>
+<form enctype="multipart/form-data" action="script.php" method="post">
+<input type="hidden" name="max_size" value="102400"/>
+<input type="file"   name="image"    accept="image/jpeg"/><br/>
+<input type="submit" name="Enviar"   value="enviar"/>
+</form>
+</body>
+</html
