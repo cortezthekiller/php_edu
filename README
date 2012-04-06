@@ -18,7 +18,7 @@ Comprueba el archivo de la imagen y después hace un INSERT en la tabla (creada 
 Formulario con el action al mismo archivo. Muestra un desplegable con los índices de las imágenes en la base de datos. Se selecciona una y se envía para mostrarla en el navegador. El action hace un echo de la etiqueta <img> y en el atributo 'src' de la imagen se llama por el método GET a un script 'mostrar.php' con el índice 'id' de la imagen como parámetro.
 
 - mostrar.php:
-En la URL (llamada a 'mostrar.php' por el método GET) se le pasa el índice de la imagen en la tabla de la base de datos. Selecciona la imagen correspondiente y la muestra en el navegador.
+En la URL (llamada a 'mostrar.php' por el método GET) se le pasa el índice de la imagen en la tabla de la base de datos. Selecciona la imagen correspondiente y la muestra en el navegador. También muestra un enlace para volver al formulario 'form.php'.
 
 --
 Nuevos archivos para la creación de tablas de alumnos.
