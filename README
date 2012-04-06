@@ -5,3 +5,23 @@ En esta mini-aplicación voy a tratar de poner en práctica algunos de los aspec
 - FTP, enviar e-mails, cookies/sesiones
 - MySQL
 etc.
+
+6.4.2012
+De momento, pruebas para guardar imágenes en la base de datos y para visualizarlas. Archivos:
+- index.php: 
+formulario para seleccionar archivos de imágenes del ordenador. El action corresponde al fichero 'script.php'.
+
+- script.php:
+Comprueba el archivo de la imagen y después hace un INSERT en la tabla (creada antes manualmente). Muestra enlace para volver al formulario 'index.php'. 
+
+- form.php:
+Formulario con el action al mismo archivo. Muestra un desplegable con los índices de las imágenes en la base de datos. Se selecciona una y se envía para mostrarla en el navegador. El action hace un echo de la etiqueta <img> y en el atributo 'src' de la imagen se llama por el método GET a un script 'mostrar.php' con el índice 'id' de la imagen como parámetro.
+
+- mostrar.php:
+En la URL (llamada a 'mostrar.php' por el método GET) se le pasa el índice de la imagen en la tabla de la base de datos. Selecciona la imagen correspondiente y la muestra en el navegador.
+
+--
+Nuevos archivos para la creación de tablas de alumnos.
+- db.php:
+Script para la creación de la base de datos y de las tablas. La nueva base de datos consta de una tabla principal (alumnos) con una clave primaria y varias tablas secundarias (una por asignatura) que contienen las notas de cada alumno en cada asignatura. Las tablas de asignaturas están vinculadas con la tabla de alumnos a través del DNI (clave foránea).
+tablas.php
