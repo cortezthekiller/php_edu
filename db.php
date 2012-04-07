@@ -31,6 +31,7 @@ $query .= "nombre VARCHAR(20), ";
 $query .= "apellido1 VARCHAR(20), ";
 $query .= "apellido2 VARCHAR(20), ";
 $query .= "nacimiento DATE, ";
+$query .= "email VARCHAR(40) NOT NULL DEFAULT 'name@example.com', ";
 $query .= "foto BLOB NOT NULL, ";
 $query .= "curso ENUM('1A', '1B', '2A', '2B'),";
 $query .= "PRIMARY KEY(DNI),";
