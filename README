@@ -24,4 +24,12 @@ En la URL (llamada a 'mostrar.php' por el método GET) se le pasa el índice de 
 Nuevos archivos para la creación de tablas de alumnos.
 - db.php:
 Script para la creación de la base de datos y de las tablas. La nueva base de datos consta de una tabla principal (alumnos) con una clave primaria y varias tablas secundarias (una por asignatura) que contienen las notas de cada alumno en cada asignatura. Las tablas de asignaturas están vinculadas con la tabla de alumnos a través del DNI (clave foránea).
-tablas.php
+- load.php: añadir registros a partir de un archivo de datos mediante LOAD DATA INFILE
+
+- altas.php (formulario): permite dar de alta alumnos manualmente
+- altas2.php (action): hace el INSERT del registro para cada alumno
+Faltaría combinarlo con load.php para que permita desde la misma interfaz dar de alta alumnos desde un archivo de datos.
+
+- perfil.php (formulario + action) Muestra los datos de un alumno
+- alumno.php: muestra la foto del alumno.
+Hay que optimizar el proceso de muestra de datos y foto, reduciendo el número de accesos a base de datos a sólo uno. Una idea puede ser pasando los datos como variable de sesión?
