@@ -96,7 +96,6 @@ echo "<body>";
 if(!empty($_SESSION['form'])) {
    echo "<a href='http://".$_SESSION['form']."'>Volver al formulario</a>";
    unset($_SESSION['form']);   /* Liberar variable una vez utilizada */
-   session_destroy();
 } else {
    echo "Necesita habilitar las cookies en su navegador</br>";
    exit(-1);

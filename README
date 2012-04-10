@@ -38,4 +38,4 @@ Hay que optimizar el proceso de muestra de datos y foto, reduciendo el número d
 Añadir funcionalidad para tabla users (login):
 - Actualizado el código de db.php para crear tabla users (incluido codigo de trigger para encriptar las passwords con md5 antes de un insert).
 - Actualizado el código de load.php para cargar credenciales de usuarios desde un archivo de texto (users.txt).
-- Añadido formulario de login (login.php) y action script (login2.php) para comprobar credenciales de usuario
+- Añadido formulario de login (login.php) y action script (login2.php) para comprobar credenciales de usuario. Añadido código para pasar el nombre del formulario al script del action como varible de sesión. 
