@@ -1,9 +1,10 @@
 <? 
 include("/var/seguridad/db.inc.php");
 
-$main_table = "alumnos";   /* Tabla principal */
+$login_table = "users";
+$main_table  = "alumnos";   /* Tabla principal */
 /* Array con los nombres de las tablas vinculadas (asignaturas) */
-$tables = array("matematicas","historia","tecnologia"); 
+$tables      = array("matematicas", "historia", "tecnologia"); 
 
 /* Conectamos con el servidor y comprobamos la conexión */
 $link = mysql_connect($mysql_host, $mysql_user, $mysql_passwd)
@@ -62,6 +63,32 @@ foreach($tables as $asignatura) {
 
    echo "Tabla ".$asignatura." creada con éxito (o ya existía)</br>";
 }
+
+/* Creamos la tabla para el login inicial de los usuarios (profesores) */
+$query  = "CREATE TABLE IF NOT EXISTS ".$login_table;
+$query .= "( ";
+$query .= "contador TINYINT(2) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT,";
+$query .= "username VARCHAR(20), ";
+$query .= "passwd   VARCHAR(100) NOT NULL DEFAULT 'password00', ";
+$query .= "lastlogin TIMESTAMP DEFAULT 0 ON UPDATE CURRENT_TIMESTAMP,";
+$query .= "UNIQUE(username),";
+$query .= "PRIMARY KEY(contador) ";
+$query .= ") ENGINE=InnoDB";
+
+mysql_query($query, $link)
+   or die("Error CREATE TABLE ".$login_table.mysql_error());
+
+echo "Tabla ".$login_table." creada con éxito (o ya existía)</br>";
+
+/* Importante: por seguridad, queremos que las passwords se guarden */
+/* encriptadas con MD5 en la base de datos. Aprenderemos a utilizar */
+/* un trigger en MySQL, en este caso para un evento INSERT.         */
+
+$query  = "CREATE TRIGGER md5passwd BEFORE INSERT ON ".$login_table;
+$query .= " FOR EACH ROW SET NEW.passwd = MD5(NEW.passwd)";
+
+mysql_query($query, $link)
+   or die("Error CREATE TRIGGER ".$login_table.mysql_error());
 
 /* Cerramos la conexión con el servidor */
 mysql_close($link);

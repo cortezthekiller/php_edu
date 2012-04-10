@@ -1,8 +1,10 @@
 <?
 include("/var/seguridad/db.inc.php");
 
-$file   = "datos.txt";   /* Archivo de texto con los datos de los alumnos */
-$table  = "alumnos";     /* Tabla principal */
+$fusers   = "users.txt";   /* Archivo de texto con credenciales de usuarios */
+$falumnos = "alumnos.txt"; /* Archivo de texto con los datos de los alumnos */
+$tusers   = "users";       /* Tabla usuarios (profesores) */
+$talumnos = "alumnos";     /* Tabla principal */
 $tables = array("matematicas","historia","tecnologia"); /* Tablas vinculadas */
 
 
@@ -12,8 +14,15 @@ $link = mysql_connect($mysql_host, $mysql_user, $mysql_passwd)
 
 mysql_select_db($mysql_db, $link);
 
-$query  = "LOAD DATA LOCAL INFILE '".$file."'";
-$query .= " REPLACE INTO TABLE ".$table;
+$query  = "LOAD DATA LOCAL INFILE '".$fusers."'";
+$query .= " REPLACE INTO TABLE ".$tusers;
+$query .= " FIELDS TERMINATED BY ','";
+$query .= " LINES TERMINATED BY '\n' ";
+
+mysql_query($query, $link) or die("Error LOAD DATA: ".$mysql_error($link));
+
+$query  = "LOAD DATA LOCAL INFILE '".$falumnos."'";
+$query .= " REPLACE INTO TABLE ".$talumnos;
 $query .= " FIELDS TERMINATED BY ','";
 $query .= " LINES TERMINATED BY '\n' ";
 
@@ -23,7 +32,7 @@ mysql_query($query, $link) or die("Error LOAD DATA: ".$mysql_error($link));
 /* insertar los correspondientes registros en las tablas de las   */
 /* asignaturas (vinculadas por medio de DNI como clave foránea).  */
 
-$query  = "SELECT DNI FROM ".$table;
+$query  = "SELECT DNI FROM ".$talumnos;
 $result = mysql_query($query, $link);
 
 while($fila = mysql_fetch_array($result, MYSQL_ASSOC)) {
