@@ -1,24 +1,15 @@
 <?
 include_once("/var/seguridad/db.inc.php");
+include("func.inc.php");
 
 $table   = "alumnos";
 $script  = "alumno.php";
 $current = $_SERVER['SCRIPT_NAME'];
 
-/* Conexión con el servidor de base de datos */
-$link = mysql_connect($mysql_host, $mysql_user, $mysql_passwd)
-        or die("Error en la conexión: ".mysql_error());
+open_html_tags("Mostrar Perfil Alumno");
 
-mysql_select_db ($mysql_db, $link);
-
-echo "<html>";
-echo "<head>"; 
-echo "<title>Mostrar Perfil Alumno</title>";
-echo "</head>"; 
-echo "<body>";
-
-/* El formulario llama al mismo script que lo contiene */
-/* así que comprobamos si venimos del formulario.      */      
+/* El formulario se llama a sí mismo como action, */
+/* así que comprobamos si venimos del formulario. */      
 if(isset($_GET['enviar']) && $_GET['dni']) {
 
    /* Mostrar los datos del alumno en formato tabla html */
@@ -99,6 +90,5 @@ if(isset($_GET['enviar']) && $_GET['dni']) {
    echo "</form>";
 }
 
-echo "</body>";
-echo "</html>";
+close_html_tags();
 ?>

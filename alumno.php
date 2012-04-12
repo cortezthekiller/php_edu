@@ -16,8 +16,11 @@ $result = mysql_query($query, $link);
 $row    = mysql_fetch_array($result); 
 $data   = $row['foto'];
 
-header('Content-type: image/jpeg');
-echo $data;
+if($data) {
+   header('Content-type: image/jpeg');
+   echo $data;
+} else echo "no hay foto";
+
 
 mysql_free_result($result);
 mysql_close($link); 
