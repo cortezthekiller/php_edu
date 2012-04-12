@@ -15,7 +15,10 @@ Cambios relevantes en la aplicación.
 
 - forgot.php:
 - forgot2.php:
-     Formulario y action script para generar una nueva contraseña que será envíada por correo (requiere configurar un servidor de correo).
+     Formulario y action script para generar una nueva contraseña que será envíada por correo (requiere configurar un servidor de correo). Almacena la contraseña generada en la base de datos.
+
+- interface.inc.php:
+   Menú a base de botones/enlaces para cada una de las opciones mencionadas en la interfaz principal
 
 - change.php:
    Script que hace un include de 'newpass.inc.php', el formulario para cambiar la contraseña.
@@ -24,6 +27,16 @@ Cambios relevantes en la aplicación.
    Formulario de cambio de contraseña (un campo para la contraseña y otro para confirmación).
 
 - newpass.php:
-   Action script del formulario anterior. Comprueba si los campos de contraseña y confirmación de contraseña son iguales y almacena la contraseña en la DB.
+   Action script del formulario anterior. Comprueba si los campos de contraseña y confirmación de contraseña son iguales y almacena la contraseña en la DB. Después muestra de nuevo la interfaz principal.
 
 -  
+
+Otros archivos (no son de código):
+- alumnos.txt:
+   Archivo de texto para cargar datos de alumnos una vez creada la tabla alumnos y sus tablas hijas (vinculadas).
+
+- users.txt:
+   Archivo de texto para cargar datos de los usuarios de la aplicación una vez creada la tabla users.
+
+- default.bin:
+   Archivo binario (generado desde mysql con SELECT INTO DUMPFILE) que contiene una imagen de avatar que se almacenará por defecto en el perfil del alumno si no se proporciona una imagen a través de formulario.

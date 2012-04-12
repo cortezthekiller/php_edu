@@ -1,0 +1,3 @@
+\N,13785021V,Rodrigo,González,Hoyos,\N,I@love.you,\N,\N,
+\N,12345674B,Charo,Beltrán,Bueno,\N,,\N,\N,\N,
+\N,12345674C,Charo2,Beltrán2,Bueno2,\N,\N,\N,\N,\N,

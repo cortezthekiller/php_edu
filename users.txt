@@ -1,0 +1,3 @@
+\N,rodrigo,rodrigo.decroly@gmail.com,password00,0,0
+\N,pablo,rghoyos@gmail.com,password00,0,0
+\N,ivan,rodrigo.decroly@gmail.com,password00,0,0

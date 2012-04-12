@@ -4,11 +4,6 @@ include("/var/seguridad/db.inc.php");
 include("func.inc.php");
 
 $login_table = "users";
-$script1     = "altas.php";
-$script2     = "perfil.php";
-$script3     = "";
-$change      = "change.php";
-$exit        = "login.php";
 
 open_html_tags("Comprobación login");
 
@@ -43,14 +38,11 @@ if(($_POST['username'])) {
 
             echo "Fecha y hora de la última conexión: ".$row['lastlogin'];
             echo "<br/><br/>";
-            echo "<a href='".$change."'>";
-            echo "<button type='button'>Cambiar contraseña</button></a><br/>";
-            echo "<a href='".$script1."'>Dar de alta/baja alumnos</a><br/>";
-            echo "<a href='".$script2."'>Ver perfiles alumnos</a><br/>";
-            echo "<a href='".$script3."'>Modificar perfiles alumnos</a><br/>";
-            echo "<br/><br/>";
-            echo "<a href='".$exit."'>";
-            echo "<button type='button'>Cerrar sesión</button></a><br/>";
+
+            /* Interfaz principal :      */
+            /*  - Cambiar contraseña     */
+            /*  - Cerrar sesión          */
+            include("interface.inc.php"); 
 
             /* Incrementar el campo correspondiente al contador de logins */
             $query  = "UPDATE ".$login_table." SET conns=conns+1 ";
