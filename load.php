@@ -25,7 +25,7 @@ $query .= " LINES TERMINATED BY '\n' ";
 mysql_query($query, $link) or die("Error LOAD DATA: ".$mysql_error($link));
 
 /* Añadir a cada perfil de alumno un avatar por defecto */
-$result = mysql_query("SELECT contador FROM ".$talumnos, $link)
+$result = mysql_query("SELECT id FROM ".$talumnos, $link)
              or die ("Error en SELECT ".mysql_error());
 
 /* Ruta completa del archivo con el blob para el avatar por defecto.      */
@@ -34,7 +34,7 @@ $avatar = dirname(__FILE__)."/".$avatar;
 
 while($fila = mysql_fetch_array($result, MYSQL_ASSOC)) {
    $query  = "UPDATE ".$talumnos." SET foto=LOAD_FILE('".$avatar."') ";
-   $query .= "WHERE contador=".$fila['contador'];
+   $query .= "WHERE id=".$fila['id'];
 
    mysql_query($query, $link)
       or die("Error UPDATE blob ".mysql_error());

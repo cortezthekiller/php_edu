@@ -6,6 +6,13 @@ $main_table  = "alumnos";   /* Tabla principal */
 /* Array con los nombres de las tablas vinculadas (asignaturas) */
 $tables      = array("matematicas", "historia", "tecnologia"); 
 
+/* Array bidimensional para 2 triggers MySQL       */
+/* (Al final suprimimos el trigger para el UPDATE) */
+$triggers = array (
+   0 => array("name" => "md5insert", "event" => "INSERT"));
+//   1 => array("name" => "md5update", "event" => "UPDATE"));
+// Borramos el trigger del update
+
 /* Conectamos con el servidor y comprobamos la conexión */
 $link = mysql_connect($mysql_host, $mysql_user, $mysql_passwd)
         or die('Error en la conexión: '.mysql_error());
@@ -26,7 +33,7 @@ mysql_select_db($mysql_db, $link);
 /* Creación de la tabla principal */
 $query  = "CREATE TABLE IF NOT EXISTS ".$main_table;
 $query .= "( ";
-$query .= "contador TINYINT(2) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT,";
+$query .= "id TINYINT(2) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT,";
 $query .= "DNI VARCHAR(9) NOT NULL, ";
 $query .= "nombre VARCHAR(20), ";
 $query .= "apellido1 VARCHAR(20), ";
@@ -36,7 +43,7 @@ $query .= "email VARCHAR(40) NOT NULL DEFAULT 'name@example.com', ";
 $query .= "foto BLOB NOT NULL, ";
 $query .= "curso ENUM('1A', '1B', '2A', '2B'),";
 $query .= "PRIMARY KEY(DNI),";
-$query .= "UNIQUE (contador)";
+$query .= "UNIQUE (id)";
 $query .= ") ENGINE=InnoDB";
 
 mysql_query($query,$link) 
@@ -67,12 +74,15 @@ foreach($tables as $asignatura) {
 /* Creamos la tabla para el login inicial de los usuarios (profesores) */
 $query  = "CREATE TABLE IF NOT EXISTS ".$login_table;
 $query .= "( ";
-$query .= "contador TINYINT(2) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT,";
+$query .= "id TINYINT(2) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT,";
 $query .= "username VARCHAR(20), ";
+$query .= "email    VARCHAR(40) NOT NULL DEFAULT 'name@example.com', ";
 $query .= "passwd   VARCHAR(100) NOT NULL DEFAULT 'password00', ";
-$query .= "lastlogin TIMESTAMP DEFAULT 0 ON UPDATE CURRENT_TIMESTAMP,";
+$query .= "lastlogin TIMESTAMP DEFAULT CURRENT_TIMESTAMP ,";
+$query .= "conns INTEGER DEFAULT 0, ";
 $query .= "UNIQUE(username),";
-$query .= "PRIMARY KEY(contador) ";
+$query .= "UNIQUE(email),";
+$query .= "PRIMARY KEY(id) ";
 $query .= ") ENGINE=InnoDB";
 
 mysql_query($query, $link)
@@ -82,14 +92,18 @@ echo "Tabla ".$login_table." creada con éxito (o ya existía)</br>";
 
 /* Importante: por seguridad, queremos que las passwords se guarden */
 /* encriptadas con MD5 en la base de datos. Aprenderemos a utilizar */
-/* un trigger en MySQL, en este caso para un evento INSERT.         */
+/* triggers en MySQL, en este caso con los eventos INSERT.          */
 
-$query  = "CREATE TRIGGER md5passwd BEFORE INSERT ON ".$login_table;
-$query .= " FOR EACH ROW SET NEW.passwd = MD5(NEW.passwd)";
+foreach($triggers as $trigger) {
 
-mysql_query($query, $link)
-   or die("Error CREATE TRIGGER ".$login_table.mysql_error());
+   $query  = "CREATE TRIGGER ".$trigger['name'];
+   $query .= " BEFORE ".$trigger['event']." ON ".$login_table;
+   $query .= " FOR EACH ROW SET NEW.passwd = MD5(NEW.passwd)";
 
+   mysql_query($query, $link)
+      or die("Error CREATE TRIGGER ".$trigger.mysql_error());
+}
+      
 /* Cerramos la conexión con el servidor */
 mysql_close($link);
 ?>

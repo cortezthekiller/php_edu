@@ -30,10 +30,10 @@ if($_POST['newpass1'] && $_POST['newpass2']) {
       mysql_query($query, $link)
          or die("Error UPDATE ".mysql_error());
 
-//      echo "Aquí habŕia que mostrar la interfaz principal<br/>";
       /* Interfaz principal :      */
       /*  - Cambiar contraseña     */
       /*  - Cerrar sesión          */
+      /*  - Altas, etc.            */
       include("interface.inc.php");
 
    } else {
