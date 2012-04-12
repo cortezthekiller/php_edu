@@ -1,21 +1,19 @@
 <?
 session_start();
 include("/var/seguridad/db.inc.php");
+include("func.inc.php");
 
 $login_table = "users";
+$script1     = "altas.php";
+$script2     = "perfil.php";
+$script3     = "";
+$change      = "change.php";
+$exit        = "login.php";
 
-/* Conectamos con el servidor y comprobamos la conexión */
-$link = mysql_connect($mysql_host, $mysql_user, $mysql_passwd)
-        or die('Error en la conexión: '.mysql_error());
+open_html_tags("Comprobación login");
 
-mysql_select_db($mysql_db, $link);
-
-echo "<html>";
-echo "<head><title>Comprobación login</title>";
-echo "<body>";
-
-if(isset($_POST['username'])) {
-   $query  = "SELECT passwd,lastlogin FROM ".$login_table;
+if(($_POST['username'])) {
+   $query  = "SELECT id,passwd,lastlogin,conns FROM ".$login_table;
    $query .= " WHERE username = '".$_POST['username']."'";
 
    $result = mysql_query($query, $link);
@@ -23,47 +21,68 @@ if(isset($_POST['username'])) {
    if(mysql_num_rows($result)) {   /* Si el usuario existe en la tabla */
 
       $row = mysql_fetch_array($result, MYSQL_ASSOC);
+
       if(md5($_POST['passwd']) == $row['passwd']) {
-         echo "Bienvenido, ".$_POST['username']."<br/>";
-         echo "Fecha y hora de la última conexión: ".$row['lastlogin'];
+         echo "Hola, ".$_POST['username']."<br/>";
+
+         /* Propagar el id del usuario como variable de sesión */
+         $_SESSION['userid'] = $row['id'];
+         echo "login2.php propagando id: ".$_SESSION['userid'];
 
          /* Actualizar el campo 'lastlogin' con el timestamp actual */
          $query  = "UPDATE ".$login_table." SET lastlogin=CURRENT_TIMESTAMP ";
          $query .= "WHERE username='".$_POST['username']."'";
-
+ 
          mysql_query($query, $link)
             or die("Error UPDATE ".mysql_error());
-      } else {
-         echo "Nombre de usuario o password incorrectos<br/>";
 
-         /* Mostrar enlace de vuelta al formulario, cuyo */
-         /* nombre se ha pasado como variable de sesión. */
-         if(!empty($_SESSION['form'])) {
-            echo "<a href='http://".$_SESSION['form']."'>";
-            echo "Volver al formulario</a>";
-            session_unset();   /* Liberar variable(s) de sesión */
+         /* La interfaz varía dependiendo de si es el  */
+         /* primer login del usuario en la aplicación. */
+
+         if($row['conns']) {   /* No es la primera vez que se conecta */
+
+            echo "Fecha y hora de la última conexión: ".$row['lastlogin'];
+            echo "<br/><br/>";
+            echo "<a href='".$change."'>";
+            echo "<button type='button'>Cambiar contraseña</button></a><br/>";
+            echo "<a href='".$script1."'>Dar de alta/baja alumnos</a><br/>";
+            echo "<a href='".$script2."'>Ver perfiles alumnos</a><br/>";
+            echo "<a href='".$script3."'>Modificar perfiles alumnos</a><br/>";
+            echo "<br/><br/>";
+            echo "<a href='".$exit."'>";
+            echo "<button type='button'>Cerrar sesión</button></a><br/>";
+
+            /* Incrementar el campo correspondiente al contador de logins */
+            $query  = "UPDATE ".$login_table." SET conns=conns+1 ";
+            $query .= "WHERE username='".$_POST['username']."'";
+
+            mysql_query($query, $link)
+               or die("Error UPDATE ".mysql_error());
+
          } else {
-            echo "Necesita habilitar las cookies en su navegador</br>";
-            exit(-1);
+
+            echo "Es la primera vez que entras al sistema.<br/>";
+            echo "Debes cambiar la contraseña por motivos de seguridad ";
+
+            include("newpass.inc.php"); /* script cambio contraseña */
          }
+      } else {
+         echo "Nombre de usuario o password incorrecto<br/>";
+         html_link_back("Volver al formulario de login");
       }
    } else {
-      echo "Nombre de usuario o password incorrectos<br/>";
-
-      if(!empty($_SESSION['form'])) {
-         echo "<a href='http://".$_SESSION['form']."'>Volver al formulario</a>";
-         session_unset();   /* Liberar variable(s) de sesión */
-      } else {
-         echo "Necesita habilitar las cookies en su navegador</br>";
-         exit(-1);
-      }
+      echo "Nombre de usuario o password incorrecto<br/>";
+      html_link_back("Volver al formulario de login");
    }
 
    mysql_free_result($result);
    mysql_close($link);
-}
 
-echo "</body>";
-echo "</html>";
+   close_html_tags();
+
+} else {
+   echo "Por favor, introduzca un nombre de usuario<br/>";
+   html_link_back("Volver");
+}
 
 ?>

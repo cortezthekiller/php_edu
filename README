@@ -1,41 +1,29 @@
-En esta mini-aplicación voy a tratar de poner en práctica algunos de los aspectos de PHP con los que he estado trabajando las últimas semanas, tales como:
-- creación de imágenes dinámicas
-- creación de documentos PDF
-- manejo de ficheros
-- FTP, enviar e-mails, cookies/sesiones
-- MySQL
-etc.
+12.04.2012
 
-6.4.2012
-De momento, pruebas para guardar imágenes en la base de datos y para visualizarlas. Archivos:
-- index.php: 
-formulario para seleccionar archivos de imágenes del ordenador. El action corresponde al fichero 'script.php'.
+Cambios relevantes en la aplicación.
 
-- script.php:
-Comprueba el archivo de la imagen y después hace un INSERT en la tabla (creada antes manualmente). Muestra enlace para volver al formulario 'index.php'. 
+- login.php:
+   Formulario para la interfaz de login de usuario (profesor). Incluye posibilidad de generar una nueva contraseña a través de correo electrónico si se ha olvidado la contraseña actual.
 
-- form.php:
-Formulario con el action al mismo archivo. Muestra un desplegable con los índices de las imágenes en la base de datos. Se selecciona una y se envía para mostrarla en el navegador. El action hace un echo de la etiqueta <img> y en el atributo 'src' de la imagen se llama por el método GET a un script 'mostrar.php' con el índice 'id' de la imagen como parámetro.
+- login2.php:
+    Action script del formulario anterior. Comprueba si la contraseña es la correcta. En la primera conexión del usuario obliga a cambiar la contraseña por defecto (password00). En sucesivas conexiones, presentará mensaje de bienvenida,  timestamp de la última conexión y la interfaz principal, que consta de las siguientes opciones:
 
-- mostrar.php:
-En la URL (llamada a 'mostrar.php' por el método GET) se le pasa el índice de la imagen en la tabla de la base de datos. Selecciona la imagen correspondiente y la muestra en el navegador. También muestra un enlace para volver al formulario 'form.php'.
+	a. Cambiar contraseña
+	b. Altas y bajas de alumnos
+	c. Perfiles de alumnos
+	d. Cerrar sesión
 
---
-Nuevos archivos para la creación de tablas de alumnos.
-- db.php:
-Script para la creación de la base de datos y de las tablas. La nueva base de datos consta de una tabla principal (alumnos) con una clave primaria y varias tablas secundarias (una por asignatura) que contienen las notas de cada alumno en cada asignatura. Las tablas de asignaturas están vinculadas con la tabla de alumnos a través del DNI (clave foránea).
-- load.php: añadir registros a partir de un archivo de datos mediante LOAD DATA INFILE
+- forgot.php:
+- forgot2.php:
+     Formulario y action script para generar una nueva contraseña que será envíada por correo (requiere configurar un servidor de correo).
 
-- altas.php (formulario): permite dar de alta alumnos manualmente
-- altas2.php (action): hace el INSERT del registro para cada alumno
-Faltaría combinarlo con load.php para que permita desde la misma interfaz dar de alta alumnos desde un archivo de datos.
+- change.php:
+   Script que hace un include de 'newpass.inc.php', el formulario para cambiar la contraseña.
 
-- perfil.php (formulario + action) Muestra los datos de un alumno
-- alumno.php: muestra la foto del alumno.
-Hay que optimizar el proceso de muestra de datos y foto, reduciendo el número de accesos a base de datos a sólo uno. Una idea puede ser pasando los datos como variable de sesión?
+- newpass.inc.php:
+   Formulario de cambio de contraseña (un campo para la contraseña y otro para confirmación).
 
-10.4.2012
-Añadir funcionalidad para tabla users (login):
-- Actualizado el código de db.php para crear tabla users (incluido codigo de trigger para encriptar las passwords con md5 antes de un insert).
-- Actualizado el código de load.php para cargar credenciales de usuarios desde un archivo de texto (users.txt).
-- Añadido formulario de login (login.php) y action script (login2.php) para comprobar credenciales de usuario. Añadido código para pasar el nombre del formulario al script del action como varible de sesión. 
+- newpass.php:
+   Action script del formulario anterior. Comprueba si los campos de contraseña y confirmación de contraseña son iguales y almacena la contraseña en la DB.
+
+-  
