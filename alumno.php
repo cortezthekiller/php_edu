@@ -1,4 +1,5 @@
 <?
+session_start();
 include_once("/var/seguridad/db.inc.php"); 
 
 $table = "alumnos";
@@ -11,16 +12,15 @@ mysql_select_db ($mysql_db, $link);
 
 /* En la consulta seleccionamos el campo 'foto'.            */
 /* El resto de campos los pasamos como variables de sesión. */
-$query  = "SELECT * FROM ".$table." WHERE DNI='".$_GET['id']."'";
+$query  = "SELECT * FROM ".$table." WHERE contador='".$_GET['id']."'";
 $result = mysql_query($query, $link);
-$row    = mysql_fetch_array($result); 
+$row    = mysql_fetch_array($result); /* Una sola fila */
 $data   = $row['foto'];
 
 if($data) {
    header('Content-type: image/jpeg');
    echo $data;
-} else echo "no hay foto";
-
+}
 
 mysql_free_result($result);
 mysql_close($link); 

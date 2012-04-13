@@ -29,7 +29,18 @@ Cambios relevantes en la aplicación.
 - newpass.php:
    Action script del formulario anterior. Comprueba si los campos de contraseña y confirmación de contraseña son iguales y almacena la contraseña en la DB. Después muestra de nuevo la interfaz principal.
 
--  
+- curso.php:
+   Se llega desde el botón "Mostrar perfiles" de la interfaz principal.
+   Se trata de un formulario con un desplegable que permite seleccionar el curso. El script de action correspondiente es 'curso2.php'.
+
+- curso2.php:
+     Action script correspondiente al formulario 'curso.php'. Muestra una tabla con los alumnos del curso recibido por GET, ordenados de forma alfabética. Al lado de cada alumno aparece un enlace para ver el perfil completo del alumno (foto, dni, etc.). 
+
+- profile.php:
+
+- alumno.php:
+    Este archivo se llama desde profile.php a través de un enlace, pasándole en la URL el id del alumno cuya foto se debe mostrar.
+
 
 Otros archivos (no son de código):
 - alumnos.txt:

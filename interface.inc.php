@@ -1,7 +1,8 @@
 <?
 $change  = "change.php";
 $script1 = "altas.php";
-$script2 = "perfil.php";
+//$script2 = "perfil.php";
+$script2 = "curso.php";
 $script3 = "";
 $exit    = "login.php";
 
