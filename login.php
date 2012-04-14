@@ -10,7 +10,7 @@ include("func.inc.php");
 
 /* Pasamos el nombre del formulario como variable de sesión  */
 /* ya que según php.net no es recomendable usar HTTP_REFERER */
-$_SESSION['form'] = $_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];
+$_SESSION['referer'] = $_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];
 
 open_html_tags("Login de usuarios");
 

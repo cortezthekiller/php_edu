@@ -22,7 +22,8 @@ if(mysql_num_rows($result)) {   /* Si el email existe en la tabla */
    if(mail($row['email'], "Nueva contraseña", $msg)) {
 
       /* Correo enviado, procedemos al UPDATE de la contraseña en la tabla */
-      $query = "UPDATE ".$table." SET passwd=MD5('".$passwd."') ";
+      /* Recordar que el trigger llama a MD5 en cada UPDATE.               */
+      $query = "UPDATE ".$table." SET passwd='".$passwd."'";
       $query .= "WHERE id=".$row['id'];
 
       mysql_query($query, $link)

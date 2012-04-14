@@ -5,11 +5,14 @@ include("func.inc.php");
 
 /* Pasamos el nombre del formulario como variable de sesión  */
 /* ya que según php.net no es recomendable usar HTTP_REFERER */
-$_SESSION['form'] = $_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];
+$_SESSION['referer'] = $_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];
+
+$current = basename($_SERVER['SCRIPT_NAME']);
 
 open_html_tags("Formulario altas alumnos");
+echo_username();
 
-echo "altas.php - recibe sesión userid: ".$_SESSION['userid']."<br/>";
+debug_msg($current.": recibe sesión userid: ".$_SESSION['userid']);
 
 /* Array de cursos a los que pertenecen los alumnos */
 $cursos = array("1A", "1B", "2A", "2B");

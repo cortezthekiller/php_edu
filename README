@@ -42,6 +42,10 @@ Cambios relevantes en la aplicación.
     Este archivo se llama desde profile.php a través de un enlace, pasándole en la URL el id del alumno cuya foto se debe mostrar.
 
 
+- interface.php:
+    Simplemente realiza el include de 'interface.inc.php'
+    Se llama desde curso2.php para mostrar la interfaz principal
+
 Otros archivos (no son de código):
 - alumnos.txt:
    Archivo de texto para cargar datos de alumnos una vez creada la tabla alumnos y sus tablas hijas (vinculadas).
@@ -51,3 +55,6 @@ Otros archivos (no son de código):
 
 - default.bin:
    Archivo binario (generado desde mysql con SELECT INTO DUMPFILE) que contiene una imagen de avatar que se almacenará por defecto en el perfil del alumno si no se proporciona una imagen a través de formulario.
+
+Ahora, a intentar lo siguiente:
+- hacer que el timestamp de la última conexión y el contador de visitas sean una cookie ==> borrar campos de la base de datos ==> ya podremos utilizar el trigger para el UPDATE con el MD5

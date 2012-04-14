@@ -1,5 +1,9 @@
 <?
+session_start();
 $action = "newpass.php";
+
+/* Propagar el nombre del formulario como variable de sesión */
+$_SESSION['referer'] = $_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];
 
 /* Este archivo se llamará siempre a través de include(), por lo que será */
 /* el archivo llamante el que incluya los tags html de inicio y cierre.   */

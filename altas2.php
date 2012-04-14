@@ -4,9 +4,12 @@ session_start();   /* El formulario llamante se pasa como variable de sesión */
 include("/var/seguridad/db.inc.php");
 include("func.inc.php");
 
-open_html_tags("Script altas alumnos");
+$current = basename($_SERVER['SCRIPT_NAME']);
 
-echo "altas2.php - recibe sesión userid: ".$_SESSION['userid']."<br/>";
+open_html_tags("Script altas alumnos");
+echo_username();
+
+debug_msg($current.": recibe sesión userid: ".$_SESSION['userid']);
 
 $table  = "alumnos";                                     /* Tabla principal */
 $tables = array("matematicas","historia","tecnologia");  /* Child tables    */

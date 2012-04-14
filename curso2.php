@@ -4,10 +4,11 @@ session_start();
 include("/var/seguridad/db.inc.php");
 include("func.inc.php");
 
-$style  = "style='text-align: center;'";
-$table  = "alumnos";
-$perfil = "profile.php";
-$cont   = 0;   /* Contador de alumnos por curso */
+$current = basename($_SERVER['SCRIPT_NAME']);
+$style   = "style='text-align: center;'";
+$table   = "alumnos";
+$perfil  = "profile.php";
+$cont    = 0;   /* Contador de alumnos por curso */
 
 /* Seleccionar todos los alumnos del curso solicitado */
 $query  = "SELECT * from ".$table." WHERE curso='".$_GET['curso']."' ";
@@ -17,6 +18,7 @@ $result = mysql_query($query, $link)
              or die ("Error SELECT curso: ".mysql_error());
 
 open_html_tags("Listado alumnos");
+echo_username();
 
 echo "<h2 ".$style.">Curso ".$_GET['curso']."</h2></br>";
 
@@ -39,19 +41,20 @@ while($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
    $alumno = $row['apellido1']." ".$row['apellido2'].", ".$row['nombre'];
 
    echo "<td>".$alumno."</td>";
-   echo "<td><a href='".$perfil."?id=".$row['contador']."'>Ver perfil</a></td>";
+   echo "<td><a href='".$perfil."?id=".$row['id']."'>Ver perfil</a></td>";
    echo "</tr>";
 }
 
 echo "</table></tr></tr>";
 
-echo "session form name: ".$_SESSION['form'];
+debug_msg($current.": session form name: ".$_SESSION['referer']);
+
 echo "<div ".$style.">";
 html_link_back("Seleccionar otro curso");
+echo "<br/>";
+echo "<a href='interface.php'>Interfaz principal</a>";
 echo "</div>";
 
-/* Pasaremos a 'profile.php' el nombre de este script para volver a él */
-$_SESSION['form'] = $_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];
 
 html_close_tags();
 

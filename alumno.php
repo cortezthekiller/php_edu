@@ -12,7 +12,7 @@ mysql_select_db ($mysql_db, $link);
 
 /* En la consulta seleccionamos el campo 'foto'.            */
 /* El resto de campos los pasamos como variables de sesión. */
-$query  = "SELECT * FROM ".$table." WHERE contador='".$_GET['id']."'";
+$query  = "SELECT * FROM ".$table." WHERE id='".$_GET['id']."'";
 $result = mysql_query($query, $link);
 $row    = mysql_fetch_array($result); /* Una sola fila */
 $data   = $row['foto'];

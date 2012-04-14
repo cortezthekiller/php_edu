@@ -1,0 +1,3 @@
+<?
+include("interface.inc.php");
+?>

@@ -1,3 +1,4 @@
-\N,13785021V,Rodrigo,González,Hoyos,\N,I@love.you,\N,\N,
-\N,12345674B,Charo,Beltrán,Bueno,\N,,\N,\N,\N,
-\N,12345674C,Charo2,Beltrán2,Bueno2,\N,\N,\N,\N,\N,
+\N,13785021V,Rodrigo,González,Hoyos,\N,rodrigo@example.com,\N,1A
+\N,13784421V,Roberto,Durán,Pérez,\N,roberto@example.com,\N,1A
+\N,12345674B,Charo,Beltrán,Bueno,\N,charo@example.com,\N,1A
+\N,12345674C,Rita,Cantaora,Bailaora,\N,rita@example.com,\N,2B

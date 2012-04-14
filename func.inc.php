@@ -1,4 +1,14 @@
 <?
+if(!defined('DEBUGMODE')) {
+   define('DEBUGMODE', 1);
+}
+
+/* Muestra mensaje de debug en otro color */
+function debug_msg($msg)
+{
+   if(DEBUGMODE)
+      echo "<span style='color:red;'>".$msg."</span></br>"; 
+}
 
 /* Esta función genera código de apertura xhtml 1.0 validado */
 function open_html_tags($title)
@@ -19,13 +29,22 @@ function close_html_tags()
    echo "</html>";
 }
 
+function echo_username()
+{
+   if(isset($_COOKIE['username'])) {
+      echo "Usuario conectado: ".$_COOKIE['username']."<br/>";
+   } else {
+      echo "¿Cookies deshabilitadas?";
+   }
+}
+
 /* Esta función comprueba si se ha pasado el nombre del formulario llamante */
 /* mediante una variable de sesión y en ese caso muestra un link al mismo.  */
 function html_link_back($msg)
 {
-   if(!empty($_SESSION['form'])) {
-      echo "<a href='http://".$_SESSION['form']."'>".$msg."</a>";
-      unset($_SESSION['form']);   /* Liberar variable(s) de sesión */
+   if(!empty($_SESSION['referer'])) {
+      echo "<a href='http://".$_SESSION['referer']."'>".$msg."</a>";
+      //unset($_SESSION['referer']);   /* Liberar variable(s) de sesión */
    } else {
       echo "Necesita habilitar las cookies en su navegador</br>";
       exit(-1);
