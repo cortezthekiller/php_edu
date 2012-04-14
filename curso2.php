@@ -7,7 +7,7 @@ include("func.inc.php");
 $current = basename($_SERVER['SCRIPT_NAME']);
 $style   = "style='text-align: center;'";
 $table   = "alumnos";
-$perfil  = "profile.php";
+$profile = "profile.php";
 $cont    = 0;   /* Contador de alumnos por curso */
 
 /* Seleccionar todos los alumnos del curso solicitado */
@@ -19,6 +19,7 @@ $result = mysql_query($query, $link)
 
 open_html_tags("Listado alumnos");
 echo_username();
+debug_msg($current.": session form name: ".$_SESSION['referer']);
 
 echo "<h2 ".$style.">Curso ".$_GET['curso']."</h2></br>";
 
@@ -41,13 +42,11 @@ while($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
    $alumno = $row['apellido1']." ".$row['apellido2'].", ".$row['nombre'];
 
    echo "<td>".$alumno."</td>";
-   echo "<td><a href='".$perfil."?id=".$row['id']."'>Ver perfil</a></td>";
+   echo "<td><a href='".$profile."?id=".$row['id']."'>Ver perfil</a></td>";
    echo "</tr>";
 }
 
 echo "</table></tr></tr>";
-
-debug_msg($current.": session form name: ".$_SESSION['referer']);
 
 echo "<div ".$style.">";
 html_link_back("Seleccionar otro curso");
@@ -56,7 +55,7 @@ echo "<a href='interface.php'>Volver menú principal</a>";
 echo "</div>";
 
 
-html_close_tags();
+close_html_tags();
 
 mysql_free_result($result);
 mysql_close($link);

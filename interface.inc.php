@@ -1,9 +1,7 @@
 <?
 $change  = "change.php";
 $script1 = "altas.php";
-//$script2 = "perfil.php";
 $script2 = "curso.php";
-$script3 = "";
 $exit    = "login.php";
 
 /* Este archivo se llamará siempre a través de include(), por lo que será */
@@ -18,9 +16,6 @@ echo "<button type='button'>Dar de alta/baja alumnos</button></a>&nbsp;&nbsp;";
 
 echo "<a href='".$script2."'>";
 echo "<button type='button'>Ver perfiles alumnos</button></a>&nbsp;&nbsp;";
-
-echo "<a href='".$script3."'>";
-echo "<button type='button'>Modificar perfil alumnos</button></a>&nbsp;&nbsp;";
 
 echo "<a href='".$exit."'>";
 echo "<button type='button'>Cerrar sesión</button></a><br/><br/>";

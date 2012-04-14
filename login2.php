@@ -44,7 +44,7 @@ if(($_POST['username'])) {
 
             if(isset($_COOKIE['lastlogin'])) {
 
-               echo "Fecha y hora última conexión: ".$_COOKIE['lastlogin'];
+               echo "Hora y fecha última conexión: ".$_COOKIE['lastlogin'];
 
             } else {
 

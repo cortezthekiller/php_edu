@@ -20,38 +20,33 @@ $cursos = array("1A", "1B", "2A", "2B");
 echo "<h2 style='text-align: center;'>Registrar nuevo alumno</h2>";
 echo "<form name='altas' enctype='multipart/form-data' method='post' action='altas2.php'>";
 
-/* Dividiremos la presentación en tres tablas por cuestión de estética */
 echo "<table align='center' border='1'>";
 
 /* Primera fila (encabezado) de la tabla html */
 echo "<tr style='background-color: #F0FFFF;'>";   
-echo "<th>Nombre</th>";
-echo "<th>Primer apellido</th>";
-echo "<th>Segundo apellido</th>";
+echo "<th>Alumno</th>";
 echo "<th>DNI</th>";
-echo "</tr>";
-
-echo "<tr>";
-echo "<td><input type='text' name='nombre'/></td>";
-echo "<td><input type='text' name='apellido1'/></td>";
-echo "<td><input type='text' name='apellido2'/></td>";
-echo "<td><input type='text' name='dni'/></td>";
-echo "</tr>";
-echo "</table><br/>";
-
-/* Segunda tabla */
-echo "<table align='center' border='1' bgcolor='#F0FFFF'>";
-echo "<tr>";   /* Primera fila (encabezado) de la tabla html */
 echo "<th>e-mail</th>";
 echo "<th>Foto</th>";
 echo "<th>Fecha nacimiento</th>";
 echo "<th>curso</th>";
 echo "</tr>";
 
+/* Segunda fila de la tabla html para datos del alumno. */
+/* Mostrar 3 inputs (nombre y 2 apellidos) en una celda.º */
 echo "<tr>";
-echo "<td><input type='text' name='email'/></td>";
+echo "<td>";
+echo "<input type='text' name='nombre'    maxlength='20' size='4'/>";
+echo "<input type='text' name='apellido1' maxlength='20' size='4'/>, ";
+echo "<input type='text' name='apellido2' maxlength='20' size='4'/>";
+echo "</td>";
+
+echo "<td><input type='text' name='dni'maxlength='9' size='4'/></td>";
+echo "<td><input type='text' name='email' maxlength='40' size='12'/></td>";
 echo "<input type='hidden' name='max_size' value='102400'/>";
-echo "<td><input type='file' name='image' accept='image/jpeg'/></td>";
+echo "<td><input type='file' name='image' accept='image/jpeg' size='4'/></td>";
+
+/* Tres desplegables (día, mes y año) en una celda */
 echo "<td><select name='day'>";
 for($i=1; $i<32; $i++) {
    echo "<option value='$i'>$i</option>";
