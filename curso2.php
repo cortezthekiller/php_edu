@@ -52,7 +52,7 @@ debug_msg($current.": session form name: ".$_SESSION['referer']);
 echo "<div ".$style.">";
 html_link_back("Seleccionar otro curso");
 echo "<br/>";
-echo "<a href='interface.php'>Interfaz principal</a>";
+echo "<a href='interface.php'>Volver menú principal</a>";
 echo "</div>";
 
 
