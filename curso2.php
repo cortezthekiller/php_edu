@@ -5,27 +5,19 @@ include("/var/seguridad/db.inc.php");
 include("func.inc.php");
 
 $current   = basename($_SERVER['SCRIPT_NAME']);
-$style     = "style='text-align: center;'";
 $table     = "alumnos";
 $materias  = array("matematicas", "historia", "tecnologia"); 
-$fields    = array("id", "apellido1", "apellido2", "nombre");
+$fields    = array("id", "DNI", "apellido1", "apellido2", "nombre");
 $key       = "DNI";   /* Clave que vincula tablas de materias con alumnos */
 $profile   = "profile.php";
 $interface = "interface.php";
 $cont      = 0;   /* Contador de alumnos por curso */
 
-/* Seleccionar todos los alumnos del curso solicitado */
-//$query  = "SELECT * FROM ".$table." WHERE curso='".$_GET['curso']."' ";
-//$query .= "ORDER BY apellido1 ASC, apellido2 ASC, nombre ASC";
-
-//$result = mysql_query($query, $link)
-             //or die ("Error SELECT curso: ".mysql_error());
-
 open_html_tags("Listado alumnos");
 echo_username();
 debug_msg($current.": session form name: ".$_SESSION['referer']);
 
-echo "<h2 ".$style.">Curso ".$_GET['curso']."</h2><br/>";
+echo "<h2>Curso ".$_GET['curso']."</h2><br/>";
 
 /* Presentar resultados en una tabla, una fila por alumno.            */
 /* La tabla contiene también como columnas la nota en cada asignatura */
@@ -49,6 +41,7 @@ $query  = "SELECT ".$table.".".$fields[0].",";
 $query .= $table.".".$fields[1].",";
 $query .= $table.".".$fields[2].",";
 $query .= $table.".".$fields[3].",";
+$query .= $table.".".$fields[4].",";
 
 foreach($materias as $index=>$materia) {
 
@@ -103,27 +96,40 @@ while($row = mysql_fetch_array($result, MYSQL_NUM)) {
    echo "<tr>";    /* Una fila por cada alumno */
    echo "<td>".$cont."</td>";
 
+   /* $row[0]=id, $row[1]=DNI, $row[2]=apellido1, $row[3]=apellido2          */
+   /* $row[4]=nombre, $row[5]=nota-mate, $row[6]=nota-hist, $row[7]=nota-tec */
+
    /* Componer celda con el nombre y apellidos del alumno */
-   $alumno = $row[1]." ".$row[2].", ".$row[3];
+   $alumno = $row[2]." ".$row[3].", ".$row[4];
 
    echo "<td>".$alumno."</td>";
    echo "<td><a href='".$profile."?id=".$row[0]."'>Ver perfil</a></td>";
 
-   /* Mostrar las celdas para las notas de cada materia */
-   for($i=4; $i<sizeof($row); $i++) {
-      echo "<td>".$row[$i]."</td>";
+   /* Mostrar las celdas para las notas de cada materia.   */
+   /* Formulario con un input de tipo texto por cada nota. */  
+   echo "<form name='grades' method='post' action='grades.php'>";
+
+   /* Pasamos oculto el DNI y el curso del alumno.                   */
+   /* El curso lo necesitamos para el enlace de vuelta a este script */
+   echo "<input type='hidden' name='DNI'  value='".$row[1]."'/>";
+   echo "<input type='hidden' name='curso' value='".$_GET['curso']."'/>";
+
+   for($i=5, $j=0; $i<sizeof($row); $i++,$j++) {
+      $input  = "<input type='text' size='2' ";
+      $input .= "name='".$materias[$j]."' value='".$row[$i]."'/>";
+      echo "<td>".$input."</td>";
    }
 
-   /* Botón para actualizar notas alumno */
-   echo "<td><a href='#'>Actualizar</a></td>";
- 
+   /* Botón del formulario para actualizar notas alumno */
+   echo "<td><input type='submit' name='update' value='Guardar'/></td>";
+   echo "</form>";
 
    echo "</tr>";
 }
 
 echo "</table><br/><br/>";
 
-echo "<div ".$style.">";
+echo "<div>";
 html_link_back("Seleccionar otro curso");
 echo "<br/><br/>";
 echo "<a href='".$interface."'>";

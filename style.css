@@ -23,3 +23,8 @@ th
 {
    background-color: #F0FFFF;
 }
+
+h2, div
+{
+   text-align: center;
+}

@@ -17,7 +17,7 @@ debug_msg($current.": recibe sesión userid: ".$_SESSION['userid']);
 /* Array de cursos a los que pertenecen los alumnos */
 $cursos = array("1A", "1B", "2A", "2B");
 
-echo "<h2 style='text-align: center;'>Registrar nuevo alumno</h2>";
+echo "<h2>Registrar nuevo alumno</h2>";
 echo "<form name='altas' enctype='multipart/form-data' method='post' action='altas2.php'>";
 
 echo "<table align='center' border='1'>";

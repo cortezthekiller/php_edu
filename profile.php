@@ -13,7 +13,7 @@ $current = basename($_SERVER['SCRIPT_NAME']);
 open_html_tags("Mostrar Perfil Alumno");
 echo_username();
 
-echo "<h2 style='text-align: center;'>Perfil alumno</h2>";
+echo "<h2>Perfil alumno</h2>";
 
 /* Formulario que contiene una tabla con los campos de datos del alumno */
 echo "<form name='profile' enctype='multipart/form-data' method='post' action='update.php'>";
