@@ -7,7 +7,7 @@ if(!defined('DEBUGMODE')) {
 function debug_msg($msg)
 {
    if(DEBUGMODE)
-      echo "<span style='color:red;'>".$msg."</span></br>"; 
+      echo "<p class='debug'>".$msg."</p><br/>"; 
 }
 
 /* Esta función genera código de apertura xhtml 1.0 validado */
@@ -19,6 +19,7 @@ function open_html_tags($title)
    echo "<head>";
    echo "<title>".$title."</title>";
    echo "<meta http-equiv='Content-type' content='text/html;charset=UTF-8' />";
+   echo "<link rel='stylesheet' type='text/css' href='style.css' />";
    echo "</head>";
    echo "<body>";
 }
@@ -46,7 +47,7 @@ function html_link_back($msg)
       echo "<a href='http://".$_SESSION['referer']."'>".$msg."</a>";
       //unset($_SESSION['referer']);   /* Liberar variable(s) de sesión */
    } else {
-      echo "Necesita habilitar las cookies en su navegador</br>";
+      echo "Necesita habilitar las cookies en su navegador<br/>";
       exit(-1);
    }
 }

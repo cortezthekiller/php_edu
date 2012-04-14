@@ -12,10 +12,10 @@ echo "<a href='".$change."'>";
 echo "<button type='button'>Cambiar contraseña</button></a>&nbsp;&nbsp;";
 
 echo "<a href='".$script1."'>";
-echo "<button type='button'>Dar de alta/baja alumnos</button></a>&nbsp;&nbsp;";
+echo "<button type='button'>Nuevos alumnos</button></a>&nbsp;&nbsp;";
 
 echo "<a href='".$script2."'>";
-echo "<button type='button'>Ver perfiles alumnos</button></a>&nbsp;&nbsp;";
+echo "<button type='button'>Perfiles alumnos</button></a>&nbsp;&nbsp;";
 
 echo "<a href='".$exit."'>";
 echo "<button type='button'>Cerrar sesión</button></a><br/><br/>";

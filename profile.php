@@ -19,15 +19,15 @@ echo "<h2 style='text-align: center;'>Perfil alumno</h2>";
 echo "<form name='profile' enctype='multipart/form-data' method='post' action='update.php'>";
 
 /* Mostrar los datos del alumno en formato tabla html */
-echo "<table align='center' border='1' bgcolor='#F0FFFF'>";
+echo "<table id='fixed'>";
 echo "<tr>";
-echo "<th>Foto</th>";
-echo "<th>Alumno</th>";
-echo "<th>DNI</th>";
-echo "<th>Fecha nacimiento</th>";
-echo "<th>e-mail</th>";
-echo "<th>Curso</th>";
-echo "<th></th>";
+echo "<th width='12%'>Foto</th>";
+echo "<th width='24%'>Alumno</th>";
+echo "<th width='14%'>DNI</th>";
+echo "<th width='20%'>Fecha nacimiento</th>";
+echo "<th width='12%'>e-mail</th>";
+echo "<th width='4%'>Curso</th>";
+echo "<th width='14%'></th>";
 echo "</tr>";
 
 echo "<tr>";
@@ -143,7 +143,10 @@ foreach($cursos as $curso) {
 $select .= "</select>";
 echo "<td>".$select."</td>";
 
-echo "<td><input type='submit' name='update' value='Actualizar'/></td>";
+echo "<td>";
+echo "<input type='submit' name='update' value='Actualizar'/>";
+echo "<input type='submit' name='drop' value='Dar de baja'/>";
+echo "</td>";
 echo "</tr>";
 echo "</table>";
 echo "</form><br/><br/>";

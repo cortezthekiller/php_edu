@@ -1,0 +1,25 @@
+.debug
+{
+   color: #ff8000;
+}
+
+#fixed
+{
+   table-layout: fixed;
+}
+
+table
+{
+   margin: auto;
+   border-collapse: collapse;
+}
+
+table, th, td
+{
+   border: 1px solid black;
+}
+
+th
+{
+   background-color: #F0FFFF;
+}

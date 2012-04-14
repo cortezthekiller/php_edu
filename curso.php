@@ -12,7 +12,7 @@ $_SESSION['referer'] = $_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];
 open_html_tags("Seleccionar alumnos curso");
 echo_username();
 
-echo "<h2 ".$style.">Mostrar perfiles de alumnos</h2></br>";
+echo "<h2 ".$style.">Mostrar perfiles de alumnos</h2><br/>";
 
 echo "<form name='cursos' method='get' action='curso2.php'>";
 echo "<table style='margin: auto;'/>";
