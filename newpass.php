@@ -11,7 +11,7 @@ $default_passwd = "d11bd343e5e07b00f8b607403b03e9aa";  /* Encriptada */
 open_html_tags("Modificar contraseña");
 echo_username();
 
-debug_msg($current.": recibido nombre formulario: ".$_SESSION['referer']);
+debug_msg($current.": recibido nombre referer: ".$_SESSION['referer']);
 debug_msg($current.": propagando user id: ".$_SESSION['userid']);
 
 if($_POST['newpass1'] && $_POST['newpass2']) {
