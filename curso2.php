@@ -10,6 +10,7 @@ $materias  = array("matematicas", "historia", "tecnologia");
 $fields    = array("id", "DNI", "apellido1", "apellido2", "nombre");
 $key       = "DNI";   /* Clave que vincula tablas de materias con alumnos */
 $profile   = "profile.php";
+$genpdf    = "genpdf.php";
 $interface = "interface.php";
 $cont      = 0;   /* Contador de alumnos por curso */
 
@@ -25,14 +26,14 @@ echo "<table>";
 echo "<tr>";
 echo "<th>nº</th>";
 echo "<th>Alumno</th>";
-echo "<th></th>"; /* Columna para el link mostrar perfil alumno */
+echo "<th>Perfil</th>"; /* Columna para el link mostrar perfil alumno */
 
 foreach($materias as $materia) {
 
    echo "<th>".$materia."</th>";
 }
 
-echo "<th></th>"; /* Columna para botón actualizar calificaciones */
+echo "<th>Notas</th>"; /* Columna para botón actualizar calificaciones */
 echo "</tr>";
 
 /* Construimos una query a varias tablas.            */
@@ -132,6 +133,8 @@ echo "</table><br/><br/>";
 echo "<div>";
 html_link_back("Seleccionar otro curso");
 echo "<br/><br/>";
+echo "<a href='".$genpdf."?curso=".$_GET['curso']."'>";
+echo "<button type='button'>Generar PDF</button></a>";
 echo "<a href='".$interface."'>";
 echo "<button type='button'>Volver menú principal</button></a>";
 echo "</div>";
