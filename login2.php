@@ -28,7 +28,7 @@ if(($_POST['username'])) {
 
       if(md5($_POST['passwd']) == $row['passwd']) {
 
-         echo_username();  /* Usa la cookie 'username' */
+//         echo_username();  /* Usa la cookie 'username' */
 
          /* Propagar el id del usuario como variable de sesión */
          $_SESSION['userid'] = $row['id'];
@@ -41,6 +41,7 @@ if(($_POST['username'])) {
          if($row['passwd'] != $default_passwd) {   
 
             /* No es la primera vez que se conecta */
+            echo_username();  /* Usa la cookie 'username' */
 
             if(isset($_COOKIE['lastlogin'])) {
 
@@ -58,7 +59,10 @@ if(($_POST['username'])) {
             /*  - Cerrar sesión          */
             include("interface.inc.php"); 
 
-         } else {
+         } else {   /* Default password */
+
+            /* La 1ª vez todavía no podemos ver el username con la cookie */
+            echo "Usuario conectado: ".$_POST['username']."<br/>";
 
             echo "Es la primera vez que entras al sistema.<br/>";
             echo "Debes cambiar la contraseña por motivos de seguridad ";
